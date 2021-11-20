@@ -49,13 +49,13 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: "talos-192-168-167-184"
+          - name: "talos1"
             devices:
               - name: "vdb"
-          - name: "talos-192-168-167-185"
+          - name: "talos2"
             devices:
               - name: "vdb"
-          - name: "talos-192-168-167-186"
+          - name: "talos3"
             devices:
               - name: "vdb"
     cephBlockPools:
