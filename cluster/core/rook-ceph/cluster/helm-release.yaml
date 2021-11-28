@@ -28,9 +28,9 @@ spec:
     monitoring:
       enabled: false
     ingress:
-      ingressClassName: "traefik"
       dashboard:
         annotations:
+          kubernetes.io/ingress.class: "traefik"
           traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
           cert-manager.io/cluster-issuer: "letsencrypt-production"
         host:
