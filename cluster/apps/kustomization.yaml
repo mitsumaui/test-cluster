@@ -5,5 +5,5 @@ resources:
   - kube-system
   - networking
   - system-upgrade
-  - backup-system
+  - velero
   
