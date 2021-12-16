@@ -5,13 +5,6 @@ metadata:
   name: rook-ceph-cluster
   namespace: rook-ceph
 spec:
-  install:
-    disableWait: true
-    remediation:
-      retries: 100
-  upgrade:
-    remediation:
-      retries: 100
   interval: 5m
   chart:
     spec:
@@ -62,6 +55,7 @@ spec:
     cephBlockPools:
       - name: ceph-blockpool
         spec:
+          failureDomain: host
           replicated:
             size: 3
         storageClass:
@@ -82,3 +76,4 @@ spec:
             csi.storage.k8s.io/fstype: ext4
     cephFileSystems: []
     cephObjectStores: []
+    
