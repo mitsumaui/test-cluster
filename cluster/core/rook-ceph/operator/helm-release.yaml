@@ -6,13 +6,6 @@ metadata:
   namespace: rook-ceph
 spec:
   interval: 5m
-  install:
-    disableWait: true
-    remediation:
-      retries: 100
-  upgrade:
-    remediation:
-      retries: 100
   chart:
     spec:
       # renovate: registryUrl=https://charts.rook.io/release
@@ -25,6 +18,11 @@ spec:
   values:
     crds:
       enabled: false
+    csi:
+      enableCephfsDriver: false
+      enableCephfsSnapshotter: false
+    monitoring:
+      enabled: true
     resources:
       requests:
         cpu: 100m
