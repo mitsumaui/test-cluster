@@ -2,7 +2,7 @@ terraform {
   required_providers {
     libvirt = {
       source = "dmacvicar/libvirt"
-      version = "0.6.12"
+      version = "0.6.14"
     }
   }
 }# We fetch the latest ubuntu release image from their mirrors
