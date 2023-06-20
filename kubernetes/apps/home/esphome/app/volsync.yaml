@@ -1,0 +1,38 @@
+---
+# yaml-language-server: $schema=https://schemas.budimanjojo.com/volsync.backube/replicationsource_v1alpha1.json
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: esphome
+spec:
+  sourcePVC: config-esphome-0
+  trigger:
+    schedule: 0 0 * * *
+  restic:
+    copyMethod: Snapshot
+    pruneIntervalDays: 7
+    repository: esphome-restic-secret
+    volumeSnapshotClassName: csi-ceph-blockpool
+    storageClassName: ceph-block
+    moverSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+    retain:
+      daily: 10
+      within: 3d
+
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.26.1-standalone-strict/secret-v1.json
+apiVersion: v1
+kind: Secret
+metadata:
+  name: esphome-restic-secret
+  labels:
+    app.kubernetes.io/name: esphome
+type: Opaque
+stringData:
+  RESTIC_REPOSITORY: ${SECRET_RESTIC_S3_REPO}/homeassistant
+  RESTIC_PASSWORD: ${SECRET_RESTIC_PASSWORD}
+  AWS_ACCESS_KEY_ID: ${SECRET_RESTIC_S3_KEY}
+  AWS_SECRET_ACCESS_KEY: ${SECRET_RESTIC_S3_PASS}
